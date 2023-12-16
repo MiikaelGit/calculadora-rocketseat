@@ -1,4 +1,4 @@
- <h1 align="center">#boraCodar Challenge Calculator</h1>
+# #boraCodar Challenge Calculator
 This project is a [RocketSeat](https://www.rocketseat.com.br/)'s Bora Codar 5th Weekly Challenge with consists in create a total functional calculator.
 
 ## Languages used in the project:
