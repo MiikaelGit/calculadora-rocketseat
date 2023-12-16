@@ -29,16 +29,16 @@ function calc() {
         clearAll()
     }
     if (result.innerHTML.includes('..') || result.innerHTML.includes('++') || result.innerHTML.includes('--') || result.innerHTML.includes('**') || result.innerHTML.includes('//')) {
-        alert("Erro")
+        alert("Error")
         clearAll()
         return
     }
-    const showResult = operation.innerHTML;
+    const showOperation = operation.innerHTML;
     const data = result.innerHTML;
     if (data.includes('+') || data.includes('-') || data.includes('*') || data.includes('/')) {
         operation.innerHTML += data;
         if (operation.innerHTML) {
-            result.innerHTML = eval(showResult + data);
+            result.innerHTML = eval(showOperation + data);
         }
     }
 }
