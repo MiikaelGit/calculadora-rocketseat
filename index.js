@@ -2,11 +2,16 @@ const operation = document.querySelector('[data-operation]');
 const result = document.querySelector('[data-result]');
 
 function insert(number) {
-    const data = result.innerHTML += number;
-    if (data.includes('+') || data.includes('-') || data.includes('*') || data.includes('/')) {
-        operation.innerHTML += data;
-        result.innerHTML = '';
+    if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
+        clearAll()
     }
+    if (result.innerHTML.includes('..') || result.innerHTML.includes('++') || result.innerHTML.includes('--') || result.innerHTML.includes('**') || result.innerHTML.includes('//')) {
+        alert("Error")
+        clearAll()
+        return
+    }
+    result.innerHTML += number;
+    operation.innerHTML = ""
 }
 
 function clearAll() {
@@ -15,50 +20,67 @@ function clearAll() {
 }
 
 function back() {
-    operation.innerHTML = operation.innerText.toString().substring(0, operation.innerText.length - 1);
-    result.innerHTML = '';
+    result.innerHTML = result.innerText.toString().substring(0, result.innerText.length - 1);
+    operation.innerHTML = '';
 }
 
 function calc() {
+    if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
+        clearAll()
+    }
+    if (result.innerHTML.includes('..') || result.innerHTML.includes('++') || result.innerHTML.includes('--') || result.innerHTML.includes('**') || result.innerHTML.includes('//')) {
+        alert("Erro")
+        clearAll()
+        return
+    }
     const showResult = operation.innerHTML;
     const data = result.innerHTML;
-    operation.innerHTML += data;
-    if (operation.innerHTML) {
-        result.innerHTML = eval(showResult + data);
+    if (data.includes('+') || data.includes('-') || data.includes('*') || data.includes('/')) {
+        operation.innerHTML += data;
+        if (operation.innerHTML) {
+            result.innerHTML = eval(showResult + data);
+        }
     }
-
 }
 
 function percent() {
-    const data = result.innerHTML;
-    operation.innerHTML += data;
-    const percentage = eval(result.innerHTML) / 100;
-    result.innerHTML = percentage;
+    if (!((result.innerHTML.includes('+')) || (result.innerHTML.includes('-')) || (result.innerHTML.includes('*')) || (result.innerHTML.includes('/')))) {
+        return;
+    } else if (result.innerHTML.length === 0) {
+        return;
+    } else {
+        const data = result.innerHTML;
+        operation.innerHTML += data;
+        const percentage = eval(result.innerHTML) / 100;
+        result.innerHTML = percentage;
 
 
-    if (operation.innerHTML.includes('+')) {
-        const num1 = operation.innerHTML.split('+')[0];
-        const num2 = operation.innerHTML.split('+')[1];
-        const newNum1 = Number(num1);
-        const newNum2 = Number(num2);
-        const percentage = newNum2 / 100;
-        const times = newNum1 * percentage;
-        const total = newNum1 + times;
-        result.innerHTML = total;
-    } else if (operation.innerHTML.includes('-')) {
-        const num1 = operation.innerHTML.split('-')[0];
-        const num2 = operation.innerHTML.split('-')[1];
-        const newNum1 = Number(num1);
-        const newNum2 = Number(num2);
-        const percentage = newNum2 / 100;
-        const times = newNum1 * percentage;
-        const total = newNum1 - times;
-        result.innerHTML = total;
+        if (operation.innerHTML.includes('+')) {
+            const num1 = operation.innerHTML.split('+')[0];
+            const num2 = operation.innerHTML.split('+')[1];
+            const newNum1 = Number(num1);
+            const newNum2 = Number(num2);
+            const percentage = newNum2 / 100;
+            const times = newNum1 * percentage;
+            const total = newNum1 + times;
+            result.innerHTML = total;
+        } else if (operation.innerHTML.includes('-')) {
+            const num1 = operation.innerHTML.split('-')[0];
+            const num2 = operation.innerHTML.split('-')[1];
+            const newNum1 = Number(num1);
+            const newNum2 = Number(num2);
+            const percentage = newNum2 / 100;
+            const times = newNum1 * percentage;
+            const total = newNum1 - times;
+            result.innerHTML = total;
+        }
     }
-
 }
 
 function plusMinus() {
+    if (result.innerHTML.length === 0) {
+        return;
+    }
     let data = result.innerHTML;
     let newData = Number(data) * -1;
     result.innerHTML = newData;
