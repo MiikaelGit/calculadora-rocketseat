@@ -3,15 +3,15 @@ const result = document.querySelector('[data-result]');
 
 function insert(number) {
     if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
-        clearAll()
-    }
-    if (result.innerHTML.includes('..') || result.innerHTML.includes('++') || result.innerHTML.includes('--') || result.innerHTML.includes('**') || result.innerHTML.includes('//')) {
+        clearAll();
+    } else if (result.innerHTML.includes('..') || result.innerHTML.includes('++') || result.innerHTML.includes('--') || result.innerHTML.includes('**') || result.innerHTML.includes('//')) {
         alert("Error")
-        clearAll()
+        clearAll();
         return
+    } else {
+        result.innerHTML += number;
+        operation.innerHTML = "";
     }
-    result.innerHTML += number;
-    operation.innerHTML = ""
 }
 
 function clearAll() {
@@ -25,28 +25,35 @@ function back() {
 }
 
 function calc() {
-    if (result.innerHTML[result.innerHTML.length - 1] === '+' || result.innerHTML[result.innerHTML.length - 1] === '-' || result.innerHTML[result.innerHTML.length - 1] === '*' || result.innerHTML[result.innerHTML.length - 1] === '/' || result.innerHTML[result.innerHTML.length - 1] === '.') {
-        alert("Error")
-        clearAll()
-        return
-    }
-    if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
-        clearAll()
-    }
-    const showOperation = operation.innerHTML;
-    const data = result.innerHTML;
-    if (data.includes('+') || data.includes('-') || data.includes('*') || data.includes('/')) {
-        operation.innerHTML += data;
-        if (operation.innerHTML) {
-            result.innerHTML = eval(showOperation + data);
+    if (result.innerHTML.length > 0 && operation.innerHTML.length > 0) {
+        return;
+    } else if (result.innerHTML[result.innerHTML.length - 1] === '+' || result.innerHTML[result.innerHTML.length - 1] === '-' || result.innerHTML[result.innerHTML.length - 1] === '*' || result.innerHTML[result.innerHTML.length - 1] === '/' || result.innerHTML[result.innerHTML.length - 1] === '.') {
+        alert("Error");
+        clearAll();
+        return;
+    } else if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
+        clearAll();
+    } else {
+        const showOperation = operation.innerHTML;
+        const data = result.innerHTML;
+        if (data.includes('+') || data.includes('-') || data.includes('*') || data.includes('/')) {
+            operation.innerHTML += data;
+            if (operation.innerHTML) {
+                result.innerHTML = eval(showOperation + data);
+            }
         }
     }
 }
 
 function percent() {
-    if (!((result.innerHTML.includes('+')) || (result.innerHTML.includes('-')) || (result.innerHTML.includes('*')) || (result.innerHTML.includes('/')))) {
-        result.innerHTML = 0;
-        operation.innerHTML = 0;
+    if (result.innerHTML === "NaN") {
+        alert("NaN in programming means not a number, it seems you went too far, don't you think? Lol");
+        clearAll();
+        return
+    } else if (!((result.innerHTML.includes('+')) || (result.innerHTML.includes('-')) || (result.innerHTML.includes('*')) || (result.innerHTML.includes('/')))) {
+        result.innerHTML /= 100;
+        operation.innerHTML = '';
+
     } else if (result.innerHTML.length === 0) {
         return;
     } else {
