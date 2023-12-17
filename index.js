@@ -25,13 +25,13 @@ function back() {
 }
 
 function calc() {
-    if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
-        clearAll()
-    }
-    if (result.innerHTML.includes('..') || result.innerHTML.includes('++') || result.innerHTML.includes('--') || result.innerHTML.includes('**') || result.innerHTML.includes('//')) {
+    if (result.innerHTML[result.innerHTML.length - 1] === '+' || result.innerHTML[result.innerHTML.length - 1] === '-' || result.innerHTML[result.innerHTML.length - 1] === '*' || result.innerHTML[result.innerHTML.length - 1] === '/' || result.innerHTML[result.innerHTML.length - 1] === '.') {
         alert("Error")
         clearAll()
         return
+    }
+    if (result.innerHTML === '+' || result.innerHTML === '-' || result.innerHTML === '*' || result.innerHTML === '/') {
+        clearAll()
     }
     const showOperation = operation.innerHTML;
     const data = result.innerHTML;
@@ -45,7 +45,8 @@ function calc() {
 
 function percent() {
     if (!((result.innerHTML.includes('+')) || (result.innerHTML.includes('-')) || (result.innerHTML.includes('*')) || (result.innerHTML.includes('/')))) {
-        return;
+        result.innerHTML = 0;
+        operation.innerHTML = 0;
     } else if (result.innerHTML.length === 0) {
         return;
     } else {
