@@ -47,7 +47,7 @@ function calc() {
 
 function percent() {
     if (result.innerHTML === "NaN") {
-        alert("NaN in programming means not a number, it seems you went too far, don't you think? Lol");
+        alert("NaN in programming means not a number, it seems you went too far, don't you think? 😅");
         clearAll();
         return
     } else if (!((result.innerHTML.includes('+')) || (result.innerHTML.includes('-')) || (result.innerHTML.includes('*')) || (result.innerHTML.includes('/')))) {
